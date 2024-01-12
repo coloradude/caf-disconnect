@@ -1,5 +1,6 @@
 import { CastReceiverContext, ContentProtection, NetworkRequestInfo, PlayerManager } from 'chromecast-caf-receiver/cast.framework';
 import { LoadRequestData } from 'chromecast-caf-receiver/cast.framework.messages';
+import { EventType } from 'chromecast-caf-receiver/cast.framework.system';
 import { CAFDrmConfig, CAFMediaInfoCustomData, CAFSourceOptions } from 'bitmovin-player';
 
 const CAST_MESSAGE_NAMESPACE = 'urn:x-cast:com.bitmovin.player.caf';
@@ -15,6 +16,7 @@ export default class CAFReceiver {
 
   public init() {
     // cast.framework.CastReceiverContext.getInstance().setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
+    cast.framework.CastReceiverContext.getInstance().addEventListener(EventType.SENDER_DISCONNECTED, () => {})
 
     this.attachEvents();
     this.context.start();
